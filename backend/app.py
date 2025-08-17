@@ -4,7 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import numpy
+import cv2
 import uvicorn
+
+from src.components.data_transformation import DataTransformation
 
 # Initialize app
 app = FastAPI(title="Traffic Sign Recognition API")
@@ -20,9 +24,9 @@ app.add_middleware(
 
 # Load model once at startup
 try:
-    model = tf.keras.models.load_model("traffic_sign_model.h5")
+    model = tf.keras.models.load_model("artifacts/Saved_Models/VGGNet.h5")
 except OSError:
-    raise RuntimeError("Model file not found. Place 'traffic_sign_model.h5' in backend folder.")
+    raise RuntimeError("Model file not found. Place 'VGGNet.h5' in backend folder.")
 
 # List of class names for prediction results
 class_names = [
@@ -42,13 +46,20 @@ class_names = [
     "End of no passing by vehicles over 3.5 metric tons"
 ]
 
+def preprocess_image(image):
+    gray_image = image.convert("L")  # Convert RGB to Grayscale
+    normalized = np.array(gray_image) / 255.0  # Normalize to [0, 1]
+    image_with_channel = np.expand_dims(normalized, axis=-1)  # Add channel dimension
+
+    return image_with_channel
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     try:
         # Load and preprocess image
-        img = Image.open(file.file).convert("RGB").resize((30, 30))
-        img_array = np.array(img) / 255.0
-        img_array = np.expand_dims(img_array, axis=0)
+        img = Image.open(file.file).convert("RGB").resize((32, 32))
+        preprocessed_image = preprocess_image(img)
+        img_array = np.expand_dims(preprocessed_image, 0)
 
         # Make prediction
         prediction = model.predict(img_array)
