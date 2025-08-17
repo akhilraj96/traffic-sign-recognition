@@ -1,0 +1,11 @@
+# Logs
+logs
+*.log
+
+
+# Editor directories and files
+artifacts
+data
+env
+
+*.egg-info
