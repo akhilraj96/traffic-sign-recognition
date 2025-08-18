@@ -1,0 +1,63 @@
+  
+├───backend
+│   │   .gitignore
+│   │   app.py
+│   │   Dockerfile
+│   │   requirements.txt
+│   │   requirements2.txt
+│   │   setup.py
+│   │   view_dataset.py
+│   │   
+│   ├───artifacts
+│   │   │   test.p
+│   │   │   train.p
+│   │   │   
+│   │   └───Saved_Models
+│   │           LeNet.h5
+│   │           VGGNet.h5
+│   │      
+│   └───src
+│       │   exception.py
+│       │   logger.py
+│       │   utils.py
+│       │   __init__.py
+│       │   
+│       ├───components
+│       │       data_transformation.py
+│       │       model.py
+│       │       model_trainer.py
+│       │       __init__.py 
+│       │           
+│       └───pipeline
+│               predict_pipeline.py
+│               train_pipeline.py
+│               __init__.py
+│         
+└───frontend
+    │   .gitignore
+    │   eslint.config.js
+    │   index.html
+    │   LICENSE
+    │   package-lock.json
+    │   package.json
+    │   postcss.config.js
+    │   README.md
+    │   tailwind.config.js
+    │   vite.config.js
+    │                     
+    ├───public
+    │       AR.svg
+    │
+    └───src
+        │   App.css
+        │   App.jsx
+        │   index.css
+        │   main.jsx
+        │
+        ├───assets
+        │       react.svg
+        │
+        └───components
+                TrafficSignRecognition.jsx
+                UploadCard.jsx
+                
