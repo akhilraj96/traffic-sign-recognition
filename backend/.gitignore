@@ -4,10 +4,12 @@ logs
 
 
 # Editor directories and files
-artifacts
+# artifacts
 data
 env
 
 test.py
 
+*.h5
+*.p
 *.egg-info
