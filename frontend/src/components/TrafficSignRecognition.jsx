@@ -1,7 +1,7 @@
 // frontend/src/components/TrafficSignRecognition.jsx
 import React, { useState, useRef, useEffect } from "react";
 
-export default function TrafficSignRecognition({ apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000" }) {
+export default function TrafficSignRecognition({ apiUrl = "https://traffic-sign-recognition-frby.onrender.com" || "http://localhost:8000" }) {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
