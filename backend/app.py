@@ -62,9 +62,10 @@ async def predict(file: UploadFile = File(...)):
         img_array = np.expand_dims(preprocessed_image, 0)
 
         # Make prediction
-        prediction = model.predict(img_array)
-        class_idx = np.argmax(prediction)
-        confidence = float(np.max(prediction))
+        prediction_logits = model.predict(img_array)  # shape (1, n_classes)
+        probabilities = tf.nn.softmax(prediction_logits).numpy()  # convert logits to probabilities
+        class_idx = np.argmax(probabilities)
+        confidence = float(np.max(probabilities))
 
         return {
             "class": class_names[class_idx],

@@ -8,4 +8,6 @@ artifacts
 data
 env
 
+test.py
+
 *.egg-info
